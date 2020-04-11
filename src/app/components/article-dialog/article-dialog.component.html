@@ -11,10 +11,10 @@
               cdkAutosizeMaxRows="1"></textarea>
   </mat-form-field>
 </div>
-<mat-divider></mat-divider><br>
+<mat-divider></mat-divider><br *ngIf="create">
 <div mat-dialog-content>
   <div *ngIf="!edit">
-    <pre>{{data?.article?.content || 'Empty Content'}}</pre>
+    <pre class="articleContent">{{data?.article?.content || 'Empty Content'}}</pre>
   </div>
   <div *ngIf="edit">
     <mat-form-field [style.fontSize]="'16px'" appearance="outline">
