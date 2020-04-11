@@ -10,9 +10,9 @@ export class Database {
 
   constructor(saveOnDisk?: boolean) {
     this.articles = new Map<number, Article>();
-    this.idGenerator = 1;
     this.saveOnDisk = saveOnDisk || false;
     this.loadFromDisk();
+    this.idGenerator = this.articles.size + 1;
   }
 
   public save(article: Article): Article {
