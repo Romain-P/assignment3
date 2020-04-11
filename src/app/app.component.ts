@@ -14,25 +14,34 @@ import {DialogData} from './components/article-dialog/dialog-data';
 export class AppComponent implements OnInit {
   title = 'assignment03';
   articles: Article[];
+  reduced: Article[];
   length = 100;
   pageSize = 10;
-  pageSizeOptions: number[] = [5, 10, 25, 100];
+  pageSizeOptions: number[] = [1, 2, 5, 10, 25, 100];
   pageEvent: PageEvent;
 
   constructor(public dialog: MatDialog, public articleService: ArticleService) {}
 
   ngOnInit(): void {
+    this.pageEvent = {pageIndex: 0, previousPageIndex: undefined, length: this.length, pageSize: 10};
     this.articleService.loadAll().then(x => this.initArticles(x));
   }
 
   initArticles(articles: Article[]): void {
-    this.articles = articles;
+    this.articles = articles.reverse();
     this.length = articles.length;
+    this.reduceArticles();
   }
 
-  onSelectedPage(event?: PageEvent): PageEvent | undefined {
+  onSelectedPage(event?: PageEvent) {
+    if (event === undefined) return;
+    this.pageEvent = event;
+    this.reduceArticles();
+  }
 
-    return event;
+  reduceArticles() {
+    const startIndex = this.pageEvent.pageSize * this.pageEvent.pageIndex;
+    this.reduced = this.articles.filter((_, i) => i >= startIndex && i < startIndex + this.pageEvent.pageSize);
   }
 
   openDialog(currentArticle: Article, create?: boolean): void {

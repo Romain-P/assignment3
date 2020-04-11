@@ -26,7 +26,6 @@ api.delete('/api/article/:id', (req, res) => {
   res.status(200).end();
 });
 
-
 ////////////////////////////////////////////////// SERVE FRONTEND //////////////////////////////////////////////////////////////////////////
 
 api.use('/', express.static(`${__dirname}/../../dist/assignment03`));
@@ -35,4 +34,3 @@ api.listen(process.env.PORT || 80, () => {
   console.log('Open your broswer, you should see the website at http://localhost');
   console.log('API is accessible using http://localhost/api');
 });
-
