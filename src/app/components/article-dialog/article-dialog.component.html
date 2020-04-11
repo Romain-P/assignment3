@@ -1,0 +1,46 @@
+<div *ngIf="!edit">
+  <h1 mat-dialog-title>{{data?.article?.title || 'Empty Title'}}</h1>
+</div>
+<div *ngIf="edit">
+  <mat-form-field [style.fontSize]="'16px'">
+    <mat-label>Article Title</mat-label>
+    <textarea matInput
+              [(ngModel)]="article.title"
+              cdkTextareaAutosize
+              #autosize="cdkTextareaAutosize"
+              cdkAutosizeMaxRows="1"></textarea>
+  </mat-form-field>
+</div>
+<mat-divider></mat-divider><br>
+<div mat-dialog-content>
+  <div *ngIf="!edit">
+    <pre>{{data?.article?.content || 'Empty Content'}}</pre>
+  </div>
+  <div *ngIf="edit">
+    <mat-form-field [style.fontSize]="'16px'" appearance="outline">
+      <mat-label>Article Content</mat-label>
+      <textarea [(ngModel)]="article.content" matInput
+                cdkTextareaAutosize
+                #autosize="cdkTextareaAutosize"
+                cdkAutosizeMaxRows="15"></textarea>
+    </mat-form-field>
+  </div>
+</div>
+<mat-divider></mat-divider>
+<div *ngIf="!create">
+  <div mat-dialog-actions>
+    <button (click)="onNoClick()" mat-button [disabled]="edit">Back</button>
+    <button (click)="onEdit()" mat-button [disabled]="edit">Edit</button>
+    <button (click)="onDelete()" mat-button [disabled]="edit">Remove</button>
+    <div *ngIf="edit">
+      <button (click)="onCancel()" mat-button>Abort</button>
+      <button (click)="onSave()" mat-button>Save</button>
+    </div>
+  </div>
+</div>
+<div *ngIf="create">
+  <div mat-dialog-actions>
+    <button (click)="onNoClick()" mat-button>Back</button>
+    <button (click)="onCreate()" mat-button>Create</button>
+  </div>
+</div>
