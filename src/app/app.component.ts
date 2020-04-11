@@ -23,7 +23,8 @@ export class AppComponent implements OnInit {
   constructor(public dialog: MatDialog, public articleService: ArticleService) {}
 
   ngOnInit(): void {
-    this.pageEvent = {pageIndex: 0, previousPageIndex: undefined, length: this.length, pageSize: 10};
+    if (this.pageEvent === undefined)
+      this.pageEvent = {pageIndex: 0, previousPageIndex: undefined, length: this.length, pageSize: 10};
     this.articleService.loadAll().then(x => this.initArticles(x));
   }
 
