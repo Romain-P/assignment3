@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "tsc src/server/server.ts && node src/server/server.js",
-    "serve": "tsc src/server/server.ts && node src/server/server.js",
+    "tsc": "tsc",
+    "start": "npm run tsc src/server/server.ts && node src/server/server.js",
+    "serve": "npm run tsc src/server/server.ts && node src/server/server.js",
     "build": "ng build",
     "build:prod": "ng build --prod --aot=true",
     "test": "ng test",
